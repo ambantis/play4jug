@@ -134,7 +134,7 @@ a list of source/test/excluded folders as well as a project tree. Within the
 list, start by clicking the `x` to remove everything except the Content Root
 (all source, test, and excluded folders).
 
-Now, within the project tree, directories as Sources/Test/Excluded as follows:
+Now, within the project tree, mark directories as Sources/Test/Excluded as follows:
 
 * Sources: /app, /conf, target/scala-2.10/src_managed
 * Excluded: /.idea, .idea_modules, /target/resolution-cache,
