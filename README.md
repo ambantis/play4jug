@@ -26,7 +26,7 @@ Next, you'll want to have play installed http://www.playframework.com/.
 Creating A Hello World Application
 ----------------------------------
 Play is a "full-stack" framework. It includes a built-in server (netty) and
-build system (sbt). It is possible to create stand-alone war files to deploy to
+build system (sbt). It is possible to create stand-alone war files to deploy
 to other servers and different build tools, such as gradle or maven. However,
 if you have play installed, then you have everything you need. Netty handles
 really well, and although sbt has a reputation for being complex, within the
