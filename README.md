@@ -69,7 +69,7 @@ look something like this:
           └── IntegrationTest.java
 
 The `conf/routes` file maps http verb/uri combinations to specific controller
-functions. The `projectBuild.scala` is an sbt configuration where you will
+functions. The `project/Build.scala` is an sbt configuration where you will
 declare your managed dependencies. The rest should be self-explanatory at this
 point. Now, cd into the directory and do
 
@@ -80,12 +80,12 @@ you should see the basic hello-world application running. Now, a bit of
 explanation about these commands.
 
 * reload: you will only need to do this if you make changes to Build.scala
-  and wish to make play aware of those changes.
+  and wish to make play aware of those changes while in interactive mode.
 * update: retrives new dependencies you've specified in Build.scala to a local
   repository.
 
-If you make these statements from the command line, you can specify multiple
-steps, but in interactive-mode, you can only do one step at a time.
+If you make these sbt actions from the command line, you can specify multiple
+steps, but in interactive-mode, you can only do one at a time.
 
 Now, stop the application and enter play interactive mode:
 
@@ -128,7 +128,7 @@ For Scala 2.9.2, remove the library, and for Scala 2.10.0, add it to
 dependencies. Scala 2.9.2 is used by sbt. And you'll need Scala 2.10.0.
 
 Next, in the upper-left-hand side of the Project Structure dialog box you'll
-an area called `Project Settings`, go ahead and select `Modules`. In the
+see an area called `Project Settings`, go ahead and select `Modules`. In the
 right-side of the screen, select the `Sources` tab and you'll be presented with
 a list of source/test/excluded folders as well as a project tree. Within the
 list, start by clicking the `x` to remove everything except the Content Root
@@ -157,8 +157,9 @@ language (for-comprehension, map, and List, and lambda expressions). Instead of
 a separate markup language (like JSP), Play uses plain old Scala constructs for 
 the view templates, so you'll need a smattering of it to write the views.
 
-Next I'll explain a bit about `conf/routes` `conf/application.conf`,
-`project/Build.scala`, and `app/controllers/Application.java`
+Next I'll explain a bit about `conf/routes` `conf/application.conf`, 
+`project/Build.scala`, `app/controllers/Application.java`, and 
+`app/views/main.scala.html`
 
 Finally, we'll work through the existing hello project and make a few changes,
 illustrating how all the pieces flow together. If we have a bit of extra time,
