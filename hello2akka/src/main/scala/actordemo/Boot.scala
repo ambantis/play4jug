@@ -12,7 +12,7 @@ import akka.actor.{Props, ActorSystem}
 object Boot extends App {
   import ShoppingSpree._
 
-  implicit val system = ActorSystem("demo")
+  implicit val system = ActorSystem("ActorDemo")
 
   val bank = system.actorOf(Props(new BankAccount()), "bankOfAkka")
   val shoppingSpree = system.actorOf(Props(new ShoppingSpree(bank)), "ShoppingSpree")

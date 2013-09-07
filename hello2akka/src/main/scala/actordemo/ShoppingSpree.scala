@@ -2,7 +2,6 @@ package actordemo
 
 import akka.actor._
 import akka.actor.Terminated
-import actordemo.BankAccount.ZeroBalance
 
 /**
  * hello2akka
