@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="SBT: net.sourceforge.nekohtml:nekohtml:1.9.15">
-    <CLASSES>
-      <root url="jar://$USER_HOME$/bin/opt/typesafe/play-2.1.3/repository/local/net.sourceforge.nekohtml/nekohtml/1.9.15/jars/nekohtml.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
