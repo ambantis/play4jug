@@ -16,8 +16,8 @@ scalacOptions := Seq("-unchecked",
 resolvers += "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases"
 
 libraryDependencies ++= Seq(
-  "com.typesafe.akka" %% "akka-actor" % "2.2.0-RC1",
-  "com.typesafe.akka" %% "akka-testkit" % "2.2.0-RC1" % "test",
+  "com.typesafe.akka" %% "akka-actor" % "2.2.1",
+  "com.typesafe.akka" %% "akka-testkit" % "2.2.1" % "test",
   "org.scalatest"     %% "scalatest"    % "2.0.M5b" % "test"
 )
 
