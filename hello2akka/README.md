@@ -15,7 +15,12 @@ Loading /usr/share/java/sbt/bin/sbt-launch-lib-bash
 [info] Loading project definition from /home/ambantis/Documents/dev/play/play4jug/hello2akka/project
 [info] Set current project to hello2akka (in build file:/home/ambantis/Documents/dev/play/play4jug/hello2akka/)
 > compile
+[info] Compiling 1 Scala source to /home/ambantis/Documents/dev/play/play4jug/hello2akka/target/scala-2.10/classes...
+[success] Total time: 7 s, completed Sep 7, 2013 5:32:43 PM
+> gen-idea
 ```
+
+Note that the command to generate idea files is slightly different than with Play.
 
 Thread-Based Concurrency
 ------------------------
