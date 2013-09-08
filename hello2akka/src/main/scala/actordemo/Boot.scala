@@ -17,5 +17,5 @@ object Boot extends App {
   val bank = system.actorOf(Props(new BankAccount()), "bankOfAkka")
   val shoppingSpree = system.actorOf(Props(new ShoppingSpree(bank)), "ShoppingSpree")
 
-  shoppingSpree ! StartSimulation
+  shoppingSpree ! PartyTime
 }

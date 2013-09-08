@@ -11,13 +11,13 @@ import akka.actor.Terminated
  * Time: 11:21 AM
  */
 class ShoppingSpree(bank: ActorRef) extends Actor {
-  import ShoppingSpree._
-  import BankAccount._
-  import Person._
-  val monica = context.actorOf(Props(new Person(bank)), "Monica")
-  val ryan = context.actorOf(Props(new Person(bank)), "Ryan")
+  import ShoppingSpree.{PartyTime, PartyIsOver}
+  import Shopper.Shop
+  val monica = context.actorOf(Props(new Shopper(bank)), "Monica")
+  val ryan = context.actorOf(Props(new Shopper(bank)), "Ryan")
   context.watch(monica)
   context.watch(ryan)
+
   def receive = {
 
     // receiving message that one of the children has died
@@ -29,19 +29,18 @@ class ShoppingSpree(bank: ActorRef) extends Actor {
         context.system.shutdown()
       }
 
-    case ZeroBalance =>
+    case PartyIsOver =>
       self ! PoisonPill
       context.system.shutdown()
 
-    case StartSimulation =>
+    case PartyTime =>
+      println(s"the path of ShoppingSpree = ${context.self.path}")
       context.children.foreach(_ ! Shop)
 
-    case BoughtSomething =>
-      sender ! Shop
   }
 }
 
 object ShoppingSpree {
-  object StartSimulation
-  object StopSimulation
+  object PartyTime
+  object PartyIsOver
 }
