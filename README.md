@@ -23,6 +23,15 @@ as the Play! application has a scala repl you can use.
 
 Next, you'll want to have play installed http://www.playframework.com/.
 
+Play! uses [sbt](http://www.scala-sbt.org/) as the default build system. You will want
+to install sbt as well if you would like to view sources from within IntelliJ IDEA.
+Afer you install sbt, add with the following contents shown below to `~/.sbt/plugins`
+and `~/.sbt/plugins/0.13/plugins`
+
+```bash
+addSbtPlugin("com.github.mpeltonen" % "sbt-idea" % "1.5.1")
+```
+
 Creating A Hello World Application
 ----------------------------------
 Play is a "full-stack" framework. It includes a built-in server (netty) and
@@ -73,7 +82,28 @@ functions. The `project/Build.scala` is an sbt configuration where you will
 declare your managed dependencies. The rest should be self-explanatory at this
 point. Now, cd into the directory and do
 
-    % play clean reload update compile test run
+```bash
+% play compile
+```
+
+If you installed sbt (see above) and wish to view sources from within IntelliJ,
+then do
+
+```bash
+% sbt "gen-idea no-sbt-build-module"
+```
+
+otherwise, you can have play create the IntelliJ idea files:
+
+```bash
+% play "idea no-sbt-build-module" 
+```
+
+Now, do
+
+```bash
+% play run
+```
 
 Give it a moment to start up, and if you point your browser to localhost:9000,
 you should see the basic hello-world application running. Now, a bit of
@@ -87,31 +117,9 @@ explanation about these commands.
 If you make these sbt actions from the command line, you can specify multiple
 steps, but in interactive-mode, you can only do one at a time.
 
-Now, stop the application and enter play interactive mode:
-
-    % play
-
-Within interactive mode, we want to create the intellij project files, so do
-the following command:
-
-    [hello] $ idea with-sources=yes no-sbt-build-module
-
-This will create the idea project files. Note that every time you update the
-dependencies, you will want to do `% play clean reload update compile`, delete
-the existing intellij files (I do `rm -rf .idea*` at the command line), and
-then rebuild the idea project files from within play (This is a kind of a pain,
-but you shouldn't need to change the dependencies all that often).
-
-`with-sources=yes` says that you want intellij to have the source code. Of
-course, much of the source code will be scala, so including that depends upon
-whether you wish to navigate through the sources from within intellij.
-`no-sbt-build-module` says that the intellij project will have just one module
-for the project (as opposed to two: one for the source code and the other for
-the build). In my experience, it is better to let play itself manage building and
-compiling, though it is possible to have intellij handle it.
-
-Next, start intellij idea. You should already have the play 2.0 and scala
-plugins installed. Now open the project. If you go to File -> Project Settings,
+Next, startup IntelliJ Idea. You should already have the play 2.0 and scala
+plugins installed (you won't need the scala plugin if you will not be creating any
+scala classes). Now open the project. If you go to File -> Project Settings,
 you should see 2 errors within a red bar on the bottom. If you click on the
 text `2 errors found`, it will tell you:
 
@@ -124,17 +132,12 @@ will present 2 choices:
 * Add to Dependencies
 * Remove Library
 
-For Scala 2.9.2, remove the library, and for Scala 2.10.0, add it to
-dependencies. Scala 2.9.2 is used by sbt. And you'll need Scala 2.10.0.
+Go ahead and remove the libraries (scala 2.9.2 is used by the version of sbt that is
+built into Play 2.1.3, and you won't need scala 2.10.0 unless you'll be writing scala
+classes/objects).
 
-Next, in the upper-left-hand side of the Project Structure dialog box you'll
-see an area called `Project Settings`, go ahead and select `Modules`. In the
-right-side of the screen, select the `Sources` tab and you'll be presented with
-a list of source/test/excluded folders as well as a project tree. Within the
-list, start by clicking the `x` to remove everything except the Content Root
-(all source, test, and excluded folders).
-
-Now, within the project tree, mark directories as Sources/Test/Excluded as follows:
+Now, within the project tree, directories should be marked as Sources/Test/Excluded
+as follows (you may need to delete some of the assignments the plugin made):
 
 * Sources: /app, /conf, target/scala-2.10/src_managed
 * Excluded: /.idea, .idea_modules, /target/resolution-cache,
@@ -150,20 +153,20 @@ Outline for the Presentation
 
 For the presentation, we'll use the first couple of minutes to make sure that
 everyone was able to get Play installed, run the `hello` project, and open it
-within Intellij.
+within Intellij. Next we'll review the first two benefits of Play (Actors and
+Asynchronous). Then we'll demo a Play application.
 
-Next, I'll spend a few minutes to explain a few constructs of the scala
-language (for-comprehension, map, and List, and lambda expressions). Instead of
-a separate markup language (like JSP), Play uses plain old Scala constructs for 
-the view templates, so you'll need a smattering of it to write the views.
+Play! has several benefits:
+  * Actor-based Concurrency
+  * Asynchronous
+  * Compiled (everything, view html templates are really scala functions)
+  * Fun
 
-Next I'll explain a bit about `conf/routes` `conf/application.conf`, 
-`project/Build.scala`, `app/controllers/Application.java`, and 
-`app/views/main.scala.html`
+To highlight what is Actor-Based Concurrency, we'll take a look at
+[actordemo](hello2akka/src/main/scala/actordemo) and compare and examine how
+actors simplify dealing with concurrency.
 
-Finally, we'll work through the existing hello project and make a few changes,
-illustrating how all the pieces flow together. If we have a bit of extra time,
-I can also show everyone a bit of Akka, a very important library (both java
-and scala) that uses Erlang constructs to address concurrency. Besides Actors,
-Akka also makes use of Futures/Promises, which you will will probably encounter
-in Play! should you do any non-trivial projects with it.
+To highlight what is Asynchronous, we'll take a look at
+[futuredemo](hello2akka/src/main/scala/futuredemo)
+
+Then, we'll do some live coding with Play!
